@@ -1,0 +1,13 @@
+{
+    "name": "phpislove/dep-resolver",
+    "license": "MIT",
+    "description": "ReflectionAPI-based dependency resolver.",
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phpislove\\": "src/"
+        }
+    }
+}

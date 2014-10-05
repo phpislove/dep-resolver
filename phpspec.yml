@@ -1,0 +1,8 @@
+formatter.name: pretty
+
+suites:
+    phpislove_suite:
+        namespace: Phpislove
+        src_path: src
+        spec_path: specs
+        spec_prefix: Spec
