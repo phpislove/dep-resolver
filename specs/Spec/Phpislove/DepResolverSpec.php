@@ -23,4 +23,11 @@ class DepResolverSpec extends ObjectBehavior {
              ->duringResolve('Phpislove\Examples\UninstantiableClass');
     }
 
+    function it_initializes_a_class_without_any_dependencies()
+    {
+        $class = 'Phpislove\Examples\IndependentClass';
+
+        $this->resolve($class)->shouldHaveType($class);
+    }
+
 }

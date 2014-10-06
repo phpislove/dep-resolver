@@ -21,6 +21,8 @@ class DepResolver {
         {
             throw new Exceptions\UninstantiableClass;
         }
+
+        return $reflector->newInstance();
     }
 
 }
