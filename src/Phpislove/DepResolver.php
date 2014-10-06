@@ -1,5 +1,7 @@
 <?php namespace Phpislove;
 
+use ReflectionClass;
+
 class DepResolver {
 
     /**
@@ -11,6 +13,13 @@ class DepResolver {
         if ( ! class_exists($class))
         {
             throw new Exceptions\NonexistentClass;
+        }
+
+        $reflector = new ReflectionClass($class);
+
+        if ( ! $reflector->isInstantiable())
+        {
+            throw new Exceptions\UninstantiableClass;
         }
     }
 
