@@ -63,4 +63,11 @@ class DepResolverSpec extends ObjectBehavior {
         $this->resolve($class)->shouldHaveType($class);
     }
 
+    function it_resolves_a_typehinted_class_with_default_value()
+    {
+        $class = 'Phpislove\Examples\ClassDependencyWithDefaultValue';
+
+        $this->resolve($class)->shouldHaveType($class);
+    }
+
 }
