@@ -56,4 +56,11 @@ class DepResolverSpec extends ObjectBehavior {
              ->duringResolve('Phpislove\Examples\UnresolvableClassDependency');
     }
 
+    function it_resolves_a_typehinted_class_dependency()
+    {
+        $class = 'Phpislove\Examples\ResolvableClassDependency';
+
+        $this->resolve($class)->shouldHaveType($class);
+    }
+
 }
