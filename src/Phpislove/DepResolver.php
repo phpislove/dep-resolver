@@ -1,6 +1,6 @@
 <?php namespace Phpislove;
 
-use ReflectionClass, ReflectionParameter;
+use ReflectionClass, ReflectionParameter, ReflectionException;
 
 class DepResolver {
 
@@ -57,12 +57,33 @@ class DepResolver {
      */
     protected function resolveDependency(ReflectionParameter $dependency)
     {
+        if ($this->hasClassTypeHint($dependency))
+        {
+            return $this->resolve($dependency->getClass()->getName());
+        }
+
         if ($dependency->isDefaultValueAvailable())
         {
             return $dependency->getDefaultValue();
         }
 
         throw new Exceptions\UnresolvableDependency;
+    }
+
+    /**
+     * @param ReflectionParameter $dependency
+     * @return boolean
+     */
+    protected function hasClassTypeHint(ReflectionParameter $dependency)
+    {
+        try
+        {
+            return $dependency->getClass() instanceof ReflectionClass;
+        }
+        catch (ReflectionException $exception)
+        {
+            return false;
+        }
     }
 
 }

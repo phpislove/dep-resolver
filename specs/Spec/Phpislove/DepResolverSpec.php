@@ -50,4 +50,10 @@ class DepResolverSpec extends ObjectBehavior {
         $this->resolve($class)->shouldHaveType($class);
     }
 
+    function it_throws_an_exception_if_typehinted_class_can_not_be_instantiated()
+    {
+        $this->shouldThrow('Phpislove\Exceptions\UninstantiableClass')
+             ->duringResolve('Phpislove\Examples\UnresolvableClassDependency');
+    }
+
 }
