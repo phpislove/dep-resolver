@@ -30,6 +30,13 @@ class DepResolverSpec extends ObjectBehavior {
         $this->resolve($class)->shouldHaveType($class);
     }
 
+    function it_initializes_a_class_without_constructor()
+    {
+        $class = 'Phpislove\Examples\WithoutConstructor';
+
+        $this->resolve($class)->shouldHaveType($class);
+    }
+
     function it_throws_an_exception_if_primitive_dependency_has_no_default_value()
     {
         $this->shouldThrow('Phpislove\Exceptions\UnresolvableDependency')

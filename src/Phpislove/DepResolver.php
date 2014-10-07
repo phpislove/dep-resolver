@@ -22,7 +22,26 @@ class DepResolver {
             throw new Exceptions\UninstantiableClass;
         }
 
-        return $reflector->newInstance();
+        $constructor = $reflector->getConstructor();
+
+        if (is_null($constructor))
+        {
+            return $reflector->newInstance();
+        }
+
+        $dependencies = $constructor->getParameters();
+        $arguments = $this->resolveDependencies($dependencies);
+
+        return $reflector->newInstanceArgs($arguments);
+    }
+
+    /**
+     * @param array $dependencies
+     * @return array
+     */
+    protected function resolveDependencies(array $dependencies)
+    {
+        throw new Exceptions\UnresolvableDependency;
     }
 
 }
