@@ -1,6 +1,6 @@
 <?php namespace Phpislove;
 
-use ReflectionClass;
+use ReflectionClass, ReflectionParameter;
 
 class DepResolver {
 
@@ -41,6 +41,27 @@ class DepResolver {
      */
     protected function resolveDependencies(array $dependencies)
     {
+        $arguments = [];
+
+        foreach ($dependencies as $dependency)
+        {
+            $arguments[] = $this->resolveDependency($dependency);
+        }
+
+        return $arguments;
+    }
+
+    /**
+     * @param ReflectionParameter $dependency
+     * @return mixed
+     */
+    protected function resolveDependency(ReflectionParameter $dependency)
+    {
+        if ($dependency->isDefaultValueAvailable())
+        {
+            return $dependency->getDefaultValue();
+        }
+
         throw new Exceptions\UnresolvableDependency;
     }
 
